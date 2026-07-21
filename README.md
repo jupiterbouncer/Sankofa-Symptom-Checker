@@ -24,7 +24,7 @@ python -m venv venv
 pip install -r requirements.txt
 
 # Add API key
-cp .env.example .env
+cp .__________._______
 # Open .env and set _____API_KEY=your_key_here
 
 ```
@@ -32,7 +32,7 @@ cp .env.example .env
 ## Running the App
 
 ```powershell
-____________________
+#line____________________
 ```
 
 Then open `http://localhost:____` in your browser.
