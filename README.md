@@ -13,7 +13,7 @@ Course: CS 254 - Introduction to Artificial Intelligence | May–August 2026.
 
 ```powershell
 # Clone the repo
-git clone https://github.com/your-team/sankofa-elenchus.git
+git clone https://github.com/jupiterbouncer/Sankofa-Elenchus
 cd sankofa-elenchus
 
 # Create and activate virtual environment
