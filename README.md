@@ -1,4 +1,4 @@
-# Sankofa — Symptom Checker
+# Sankofa - Symptom Checker
 
 > An AI-powered symptom checker that uses NLP vector embeddings and multi-class classification to suggest possible conditions based on user-reported symptoms.
 
@@ -55,8 +55,8 @@ Then open `http://localhost:____` in your browser.
 |--------------|-------------------------------------------------------|
 |      `data/` |                Raw, processed datasets and embeddings |
 | `notebooks/` | EDA through evaluation, numbered by ML pipeline stage |
-|       `src/` |        Core ML pipeline — embeddings, classifier, API |
-|  `frontend/` |                UI — body map, symptom search, results |
+|       `src/` |        Core ML pipeline - embeddings, classifier, API |
+|  `frontend/` |                UI - body map, symptom search, results |
 |    `ethics/` |                     Bias, fairness, and privacy audit |
 
 ---
