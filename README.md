@@ -1,9 +1,23 @@
-# Sankofa Elenchus
-> An AI-powered Socratic writing tutor for Ashesi University students.
+# Sankofa — Symptom Checker
 
-Sankofa doesn't write your essay for you; it asks the questions that help you write it yourself.
+> An AI-powered symptom checker that uses NLP vector embeddings and multi-class classification to suggest possible conditions based on user-reported symptoms.
 
 Course: CS 254 - Introduction to Artificial Intelligence | May–August 2026.
+---
+
+## Overview
+
+Sankofa addresses a core limitation of lexical symptom matching — semantic gaps between how users describe symptoms and how they are labeled in medical datasets. By embedding symptoms into a vector space, the system can match "pain in the shoulder" to "shoulder pain" and return meaningful disease probability estimates.
+
+---
+
+## Setup
+
+```bash
+git clone https://github.com/your-team/sankofa-symptom-checker.git
+cd sankofa-symptom-checker
+pip install -r requirements.txt
+```
 
 ---
 
@@ -23,10 +37,6 @@ python -m venv venv
 # Install dependencies
 pip install -r requirements.txt
 
-# Add API key
-cp .__________._______
-# Open .env and set _____API_KEY=your_key_here
-
 ```
 
 ## Running the App
@@ -37,19 +47,36 @@ cp .__________._______
 
 Then open `http://localhost:____` in your browser.
 
-## Usage Example
+---
 
-1. Open a new writing session
-2. Paste your essay draft into the essay panel
-3. Tell Sankofa what you're working on
-4. Respond to its questions — it will never write for you
+## Project Structure
+
+|    Folder    |                       Purpose                         |
+|--------------|-------------------------------------------------------|
+|      `data/` |                Raw, processed datasets and embeddings |
+| `notebooks/` | EDA through evaluation, numbered by ML pipeline stage |
+|       `src/` |        Core ML pipeline — embeddings, classifier, API |
+|  `frontend/` |                UI — body map, symptom search, results |
+|    `ethics/` |                     Bias, fairness, and privacy audit |
 
 ---
 
 ## Team
+
 |         Name         |                Role              |
 |----------------------|----------------------------------|
 |     Karen Kwatia     | QA Engineer & Documentation Lead |
 |    Emmanuel Nkunim   | Prompt Engineer & Presenter      |
 |      Daniel Eta      | ML & Software Engineer           |
 | Oluwademilade Subair | QA Engineer & UI/UX              |
+
+---
+
+## Dataset Sources
+
+- HuggingFace symptom-disease datasets
+- Augmented symptom severity data
+
+---
+
+*This project was built as part of CS 254 - Introduction to AI at Ashesi University.*
