@@ -76,7 +76,7 @@ docs/_build/
 target/
 
 # Jupyter Notebook
-.ipynb_checkpoints
+notebooks/.ipynb_checkpoints/
 
 # IPython
 profile_default/
@@ -216,3 +216,16 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Datasets
+data/raw/
+data/processed/
+data/embeddings/
+
+# Python
+__pycache__/
+*.pyc
+.env
+
+# OS
+.DS_Store

@@ -2,8 +2,7 @@
 
 > An AI-powered symptom checker that uses NLP vector embeddings and multi-class classification to suggest possible conditions based on user-reported symptoms.
 
-Course: CS 254 - Introduction to Artificial Intelligence | May–August 2026.
----
+## Course: CS 254 - Introduction to Artificial Intelligence | May–August 2026.
 
 ## Overview
 
@@ -21,9 +20,11 @@ pip install -r requirements.txt
 
 ---
 
-## Setup & Installation
+## Installation
 
 **Prerequisites:** Python 3.10+
+
+Dataset: [drive.google.com/drive/folders/1g0x15qg93Gv1dsQj_GMuu-M1qKqqY3rs?usp=sharing](https://drive.google.com/drive/folders/1g0x15qg93Gv1dsQj_GMuu-M1qKqqY3rs?usp=sharing)
 
 ```powershell
 # Clone the repo
@@ -36,7 +37,6 @@ python -m venv venv
 
 # Install dependencies
 pip install -r requirements.txt
-
 ```
 
 ## Running the App
@@ -51,23 +51,23 @@ Then open `http://localhost:____` in your browser.
 
 ## Project Structure
 
-|    Folder    |                       Purpose                         |
-|--------------|-------------------------------------------------------|
-|      `data/` |                Raw, processed datasets and embeddings |
+| Folder       | Purpose                                               |
+| ------------ | ----------------------------------------------------- |
+| `data/`      | Raw, processed datasets and embeddings                |
 | `notebooks/` | EDA through evaluation, numbered by ML pipeline stage |
-|       `src/` |        Core ML pipeline - embeddings, classifier, API |
-|  `frontend/` |                UI - body map, symptom search, results |
-|    `ethics/` |                     Bias, fairness, and privacy audit |
+| `src/`       | Core ML pipeline - embeddings, classifier, API        |
+| `frontend/`  | UI - body map, symptom search, results                |
+| `ethics/`    | Bias, fairness, and privacy audit                     |
 
 ---
 
 ## Team
 
-|         Name         |                Role              |
-|----------------------|----------------------------------|
-|     Karen Kwatia     | QA Engineer & Documentation Lead |
-|    Emmanuel Nkunim   | Prompt Engineer & Presenter      |
-|      Daniel Eta      | ML & Software Engineer           |
+| Name                 | Role                             |
+| -------------------- | -------------------------------- |
+| Karen Kwatia         | QA Engineer & Documentation Lead |
+| Emmanuel Nkunim      | Prompt Engineer & Presenter      |
+| Daniel Eta           | ML & Software Engineer           |
 | Oluwademilade Subair | QA Engineer & UI/UX              |
 
 ---
@@ -79,4 +79,4 @@ Then open `http://localhost:____` in your browser.
 
 ---
 
-*This project was built as part of CS 254 - Introduction to AI at Ashesi University.*
+_This project was built as part of CS 254 - Introduction to AI at Ashesi University._
