@@ -225,3 +225,5 @@ data/raw/
 
 # OS
 .DS_Store
+
+.virtual_documents/
