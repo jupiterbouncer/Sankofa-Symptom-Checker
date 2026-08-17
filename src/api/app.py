@@ -1,38 +1,49 @@
 # src/api/app.py
+from contextlib import asynccontextmanager
 from datetime import datetime
 import json
 from pathlib import Path
 from typing import List, Optional
 
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from src.features.similarity import SemanticSymptomSearch
 from src.models.predict import DiseasePredictor
 
-app = FastAPI(title="Sankofa Engine API", version="2.0.0")
+# Resolve project root dynamically
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+AUDIT_LOG_PATH = PROJECT_ROOT / "data" / "logs" / "audit_sessions.jsonl"
 
-# Enable CORS for local Nuxt / Netlify frontend
+# Global Engine handles
+search_engine: Optional[SemanticSymptomSearch] = None
+predictor_engine: Optional[DiseasePredictor] = None
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    global search_engine, predictor_engine
+    # 1. Ensure log directory exists
+    AUDIT_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+    # 2. Load ML artifacts & vector search engines
+    search_engine = SemanticSymptomSearch()
+    predictor_engine = DiseasePredictor()
+    yield
+    # Teardown logic (if needed on shutdown)
+
+
+app = FastAPI(title="Sankofa Engine API", version="2.0.0", lifespan=lifespan)
+
+# Enable CORS for frontend clients
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Global Engines (loaded once at startup)
-search_engine: Optional[SemanticSymptomSearch] = None
-predictor_engine: Optional[DiseasePredictor] = None
-AUDIT_LOG_PATH = Path("data/logs/audit_sessions.jsonl")
-
-
-@app.on_event("startup")
-def startup_event():
-    global search_engine, predictor_engine
-    search_engine = SemanticSymptomSearch()
-    predictor_engine = DiseasePredictor()
-    AUDIT_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 
 # --- Request / Response Schemas ---
@@ -64,9 +75,22 @@ class DiagnosisResponse(BaseModel):
 # --- Endpoints ---
 
 
+@app.get("/")
+@app.get("/health")
+async def health_check():
+    """Health-check endpoint for uptime monitors and Render port scanning."""
+    return {
+        "status": "healthy",
+        "service": "Sankofa Engine API",
+        "timestamp": datetime.utcnow().isoformat(),
+    }
+
+
 @app.get("/api/v1/symptoms/search")
 async def search_symptoms(q: str = Query(..., min_length=2), limit: int = 5):
     """Stage 1: Vector Search Endpoint for Autosuggest UI."""
+    if search_engine is None:
+        raise HTTPException(status_code=503, detail="Search engine not initialized")
     results = search_engine.search(query=q, top_k=limit)
     return {"query": q, "matches": results}
 
@@ -74,6 +98,9 @@ async def search_symptoms(q: str = Query(..., min_length=2), limit: int = 5):
 @app.post("/api/v1/diagnose", response_model=DiagnosisResponse)
 async def run_diagnosis(payload: DiagnosisRequest):
     """Stage 2: Full Diagnostic Prediction with Post-Filtering & Audit Logging."""
+    if predictor_engine is None:
+        raise HTTPException(status_code=503, detail="Predictor engine not initialized")
+
     raw_preds = predictor_engine.predict(payload.symptoms, top_k=5)
 
     # Demographic / Biological Post-Filtering (Rule-based safety layer)
@@ -81,7 +108,7 @@ async def run_diagnosis(payload: DiagnosisRequest):
     for pred in raw_preds:
         disease = pred["disease"].lower()
 
-        # Example biological rule: prevent biological mismatch
+        # Prevent biological mismatch
         if payload.metadata.sex == "M" and any(
             w in disease for w in ["ovarian", "cervical", "uterine", "pregnancy"]
         ):
