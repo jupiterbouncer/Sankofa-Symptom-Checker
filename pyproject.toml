@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "google>=3.0.0",
     "matplotlib>=3.10.9",
     "scikit-learn>=1.7.2",
     "seaborn>=0.13.2",
