@@ -241,3 +241,7 @@ data/raw/
 frontend/node_modules/
 # Vite cache
 .vite/
+
+# Temporary. For personal investigation
+symptom_list.txt
+disease_list.txt
