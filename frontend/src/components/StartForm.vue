@@ -27,9 +27,9 @@ function submitFormData(e) {
 <template>
   <div class="personal-form-container">
     <div class="heading">
-      <img src="../assets/img/site-logo.png" alt="Onkhida Health" />
+      <img src="../assets/img/site-logo.png" alt="Sankofa Health" />
       <div class="text">
-        <h1>Onkhida Health</h1>
+        <h1>Sankofa Health</h1>
         <small>Symptom Checker</small>
       </div>
     </div>
@@ -40,7 +40,7 @@ function submitFormData(e) {
           You are about to fill out a form to learn about potential causes of
           your symptoms and next steps. Our tool offers guidance based on
           available data; for serious health concerns, consult a
-          <a class="contact-link" href="https://onkhida.me" target="_blank"
+          <a class="contact-link" href="https://sankofa.me" target="_blank"
             >qualified medical professional</a
           >.
         </p>

@@ -10,7 +10,7 @@ import FetchingIcon from "../icons/FetchingIcon.vue";
     <p class="explain">
       Conditions highlighted in red may require emergency attention. The listed
       conditions reflect your symptoms, not your diagnosis. You may consult our
-      <a target="_blank" href="https://onkhida.me">doctors</a>
+      <a target="_blank" href="https://sankofa.me">doctors</a>
       for any questions or concerns. Sankofa is an academic prototype and not a certified diagnostic device.
     </p>
     

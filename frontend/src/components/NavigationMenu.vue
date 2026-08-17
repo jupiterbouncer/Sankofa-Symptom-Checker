@@ -29,9 +29,9 @@ function restartApp() {
 <template>
   <nav>
     <div class="logo">
-      <img src="../assets/img/site-logo.png" alt="Onkhida Health" />
+      <img src="../assets/img/site-logo.png" alt="Sankofa Health" />
       <div class="text">
-        <h1>Onkhida Health</h1>
+        <h1>Sankofa Health</h1>
         <small>Symptom Checker</small>
       </div>
     </div>

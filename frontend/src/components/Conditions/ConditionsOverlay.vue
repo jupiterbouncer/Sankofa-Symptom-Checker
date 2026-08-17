@@ -55,7 +55,7 @@ function closeOverlay() {
 
         <div class="help-container">
           <button>
-            <a target="_blank" href="https://onkhida.me">Get Help</a>
+            <a target="_blank" href="https://sankofa.me">Get Help</a>
           </button>
         </div>
       </div>
