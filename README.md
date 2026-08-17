@@ -35,11 +35,41 @@ pip install -r requirements.txt
 
 ## Running the App
 
-The final app run command will be added once the API/frontend startup flow is confirmed.
+To run the application, you will need to start both the FastAPI backend server and the Vue/Vite frontend dev server.
 
-```powershell
-# Run command coming later
+### 1. Starting the FastAPI Backend API
+
+The backend handles semantic symptom search and disease diagnosis:
+
+```bash
+# Ensure your virtual environment is active
+# Linux/macOS:
+source venv/bin/activate
+# Windows:
+.\venv\Scripts\Activate.ps1
+
+# Run the Uvicorn server on port 8000
+uvicorn src.api.app:app --reload --port 8000
 ```
+
+The interactive API documentation will be available at `http://localhost:8000/docs` (Swagger UI).
+
+### 2. Starting the Frontend Dev Server
+
+The frontend provides an interactive body map and diagnostic results sidepane:
+
+```bash
+# Navigate to the frontend directory
+cd frontend
+
+# Install Node dependencies (if running for the first time)
+npm install
+
+# Run the Vite dev server
+npm run dev
+```
+
+Once running, open your browser to the local development URL (typically `http://localhost:5173`).
 
 ---
 
