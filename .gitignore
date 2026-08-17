@@ -245,3 +245,4 @@ frontend/node_modules/
 # Temporary. For personal investigation
 symptom_list.txt
 disease_list.txt
+scratch/

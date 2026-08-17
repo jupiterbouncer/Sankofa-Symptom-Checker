@@ -15,21 +15,30 @@ from src.models.predict import DiseasePredictor
 # Resolve project root dynamically
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 AUDIT_LOG_PATH = PROJECT_ROOT / "data" / "logs" / "audit_sessions.jsonl"
+BODY_MAP_PATH = PROJECT_ROOT / "data" / "symptom_body_map.json"
 
 # Global Engine handles
 search_engine: Optional[SemanticSymptomSearch] = None
 predictor_engine: Optional[DiseasePredictor] = None
+body_map_data: Optional[dict] = None
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    global search_engine, predictor_engine
+    global search_engine, predictor_engine, body_map_data
     # 1. Ensure log directory exists
     AUDIT_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
 
     # 2. Load ML artifacts & vector search engines
     search_engine = SemanticSymptomSearch()
     predictor_engine = DiseasePredictor()
+
+    # 3. Load symptom body map taxonomy
+    if BODY_MAP_PATH.exists():
+        with open(BODY_MAP_PATH, "r", encoding="utf-8") as f:
+            body_map_data = json.load(f)
+    else:
+        body_map_data = {}
     yield
     # Teardown logic (if needed on shutdown)
 
@@ -93,6 +102,28 @@ async def search_symptoms(q: str = Query(..., min_length=2), limit: int = 5):
         raise HTTPException(status_code=503, detail="Search engine not initialized")
     results = search_engine.search(query=q, top_k=limit)
     return {"query": q, "matches": results}
+
+
+@app.get("/api/v1/symptoms/by-region/{body_part}")
+async def get_symptoms_by_region(body_part: str):
+    """Filter symptoms by anatomical body region."""
+    if body_map_data is None:
+        raise HTTPException(status_code=503, detail="Body map data not initialized")
+
+    normalized_body_part = body_part.lower().strip()
+    matched_key = None
+    for key in body_map_data.keys():
+        if key.lower() == normalized_body_part:
+            matched_key = key
+            break
+
+    if matched_key is None:
+        matched_key = "General"
+
+    return {
+        "region": matched_key,
+        "symptoms": body_map_data.get(matched_key, [])
+    }
 
 
 @app.post("/api/v1/diagnose", response_model=DiagnosisResponse)

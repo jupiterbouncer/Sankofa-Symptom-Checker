@@ -136,7 +136,46 @@ export const store = reactive({
     }
   },
 
+  async fetchRegionSymptoms(region) {
+    if (!region || region === "Search") {
+      this.searchSymptoms = [];
+      return;
+    }
+    this.fetchingSymptoms = true;
+    try {
+      const res = await fetch(`${this.api_base}/symptoms/by-region/${region.toLowerCase()}`);
+      if (!res.ok) {
+        throw new Error(`Failed to fetch region symptoms: ${res.status}`);
+      }
+      const data = await res.json();
+      this.searchSymptoms = (data.symptoms || []).map((sym) => {
+        const display = sym
+          .split(" ")
+          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+          .join(" ");
+        return {
+          feature_id: sym,
+          display_name: display,
+        };
+      });
+    } catch (error) {
+      console.error("Error fetching region symptoms:", error);
+      this.searchSymptoms = [];
+    } finally {
+      this.fetchingSymptoms = false;
+    }
+  },
+
   async fetchSearchResults() {
+    if (this.searchText.trim().length > 0 && this.heading !== "Search") {
+      this.heading = "Search";
+    }
+
+    if (this.heading !== "Search") {
+      await this.fetchRegionSymptoms(this.heading);
+      return;
+    }
+
     const query = this.searchText.trim();
     if (query.length < 2) {
       this.searchSymptoms = [];
