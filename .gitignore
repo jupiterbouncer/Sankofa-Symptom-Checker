@@ -225,3 +225,14 @@ data/raw/
 
 # OS
 .DS_Store
+
+.virtual_documents/
+node_modules/
+
+# Large legacy models & raw logs
+model/random_forest.pkl
+data/logs/audit_sessions.jsonl
+data/raw/
+
+# Node
+frontend/node_modules/
