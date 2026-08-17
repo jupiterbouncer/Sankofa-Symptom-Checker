@@ -1,0 +1,18 @@
+@import "./base.css";
+
+#app {
+  width: 100%;
+}
+
+h1 {
+  font-size: 23px;
+}
+
+small {
+  color: #808080;
+  font-size: 13px;
+}
+
+.hide-this {
+  display: none;
+}

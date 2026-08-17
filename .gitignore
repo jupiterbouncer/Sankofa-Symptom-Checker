@@ -227,3 +227,6 @@ data/raw/
 .DS_Store
 
 .virtual_documents/
+node_modules/
+# original model, too large (5GiB) to go on GitHub.
+model/random_forest.pkl
