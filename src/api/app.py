@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field
 
 from src.features.similarity import SemanticSymptomSearch
 from src.models.predict import DiseasePredictor
+from src.api.disease_metadata import get_disease_metadata
 
 # Resolve project root dynamically
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -71,7 +72,9 @@ class PredictionItem(BaseModel):
     disease: str
     probability: float
     urgency: str
-    recommendation: str
+    serious: bool
+    summary: str
+    treatment: str
 
 
 class DiagnosisResponse(BaseModel):
@@ -149,12 +152,15 @@ async def run_diagnosis(payload: DiagnosisRequest):
         ):
             continue
 
+        meta = get_disease_metadata(pred["disease"], pred["probability"])
         filtered.append(
             PredictionItem(
                 disease=pred["disease"].title(),
                 probability=pred["probability"],
-                urgency="Urgent" if pred["probability"] > 0.70 else "Routine",
-                recommendation="Consult a qualified clinician for verification.",
+                urgency=meta["urgency"],
+                serious=meta["serious"],
+                summary=meta["summary"],
+                treatment=meta["treatment"],
             )
         )
 

@@ -236,9 +236,9 @@ export const store = reactive({
         title: p.disease,
         probability: p.probability,
         urgency: p.urgency,
-        serious: p.urgency === "Urgent",
-        summary: p.recommendation,
-        treatment: p.recommendation,
+        serious: p.serious,
+        summary: p.summary,
+        treatment: p.treatment,
       }));
       this.diagnosisDisclaimer = data.disclaimer || "";
     } catch (error) {
