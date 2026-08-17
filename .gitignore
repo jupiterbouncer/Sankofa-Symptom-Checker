@@ -3,6 +3,9 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# random forest because it's quite large
+model/random_forest.pkl
+
 # C extensions
 *.so
 

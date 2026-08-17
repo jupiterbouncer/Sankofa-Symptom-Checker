@@ -1,4 +1,5 @@
 from pathlib import Path
+
 import joblib
 import numpy as np
 
@@ -7,7 +8,6 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_MODEL_PATH = PROJECT_ROOT / "model" / "classifier.joblib"
 DEFAULT_ENCODER_PATH = PROJECT_ROOT / "model" / "label_encoder.pkl"
 DEFAULT_FEATURES_PATH = PROJECT_ROOT / "data" / "embeddings" / "symptom_vectors.joblib"
-
 
 class DiseasePredictor:
     def __init__(
