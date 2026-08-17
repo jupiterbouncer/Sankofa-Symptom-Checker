@@ -228,5 +228,11 @@ data/raw/
 
 .virtual_documents/
 node_modules/
-# original model, too large (5GiB) to go on GitHub.
+
+# Large legacy models & raw logs
 model/random_forest.pkl
+data/logs/audit_sessions.jsonl
+data/raw/
+
+# Node
+frontend/node_modules/
