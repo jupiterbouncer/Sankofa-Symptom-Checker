@@ -6,9 +6,10 @@ import numpy as np
 # Resolve project root dynamically (two levels up from src/models/)
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_MODEL_PATH = PROJECT_ROOT / "model" / "random_forest.pkl"
-# Use the line below if you do not have the larger random_forest.pkl file locally
-# DEFAULT_MODEL_PATH = PROJECT_ROOT / "model" / "classifier.joblib"
 DEFAULT_ENCODER_PATH = PROJECT_ROOT / "model" / "label_encoder.pkl"
+# Use the lines below if you do not have the larger random_forest.pkl file locally:
+# DEFAULT_MODEL_PATH = PROJECT_ROOT / "model" / "classifier.joblib"
+# DEFAULT_ENCODER_PATH = PROJECT_ROOT / "model" / "label_encoder_baseline.pkl"
 DEFAULT_FEATURES_PATH = PROJECT_ROOT / "data" / "embeddings" / "symptom_vectors.joblib"
 
 class DiseasePredictor:
