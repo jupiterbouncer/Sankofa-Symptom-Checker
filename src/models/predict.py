@@ -12,6 +12,7 @@ DEFAULT_ENCODER_PATH = PROJECT_ROOT / "model" / "label_encoder.pkl"
 # DEFAULT_ENCODER_PATH = PROJECT_ROOT / "model" / "label_encoder_baseline.pkl"
 DEFAULT_FEATURES_PATH = PROJECT_ROOT / "data" / "embeddings" / "symptom_vectors.joblib"
 
+
 class DiseasePredictor:
     def __init__(
         self,

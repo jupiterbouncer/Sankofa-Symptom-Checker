@@ -5,11 +5,14 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "fastapi>=0.141.1",
     "google>=3.0.0",
     "matplotlib>=3.10.9",
     "scikit-learn>=1.7.2",
     "seaborn>=0.13.2",
+    "sentence-transformers>=6.0.0",
     "torch>=2.13.0",
+    "uvicorn>=0.52.3",
 ]
 
 [dependency-groups]
